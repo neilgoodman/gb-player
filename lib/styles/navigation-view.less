@@ -1,0 +1,51 @@
+.navigation-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(@gb-light-grey, @gb-dark-grey);
+    height: 60px;
+    color: @gb-white;
+    text-shadow: 2px 2px @gb-black;
+
+    .title,
+    .navigation-view-button {
+        position: absolute;
+        top: 50%;
+        margin-top: -17px;
+        font-size: 24px;
+    }
+
+    .navigation-view-button {
+        color: @gb-white;
+        top: 50%;
+
+        &.align-left {
+            left: 15px;
+        }
+
+        &.align-right {
+            right: 15px;
+        }
+
+        &:hover {
+            color: @gb-white;
+        }
+
+        &:active {
+            color: @gb-black;
+        }
+    }
+
+    .title {
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: -17px 0 0 0;
+        padding: 0;
+    }
+
+    .title-red {
+        color: @gb-dark-red;
+    }
+}
