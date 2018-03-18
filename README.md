@@ -5,62 +5,57 @@ A work in progress to build a cross-platform video player for https://www.giantb
 ### Product Goals
 
 #### V1
-1. Run on the following platforms (chosen primarily because I own and use):
-  - Windows 10
-  - FireTV
-  - iPhone
-1. Support browsing video content in multiple categories
-1. Stream both free and premium videos
-1. Sync video progress cross-platform and potentially sync with the Giant Bomb website itself
-1. Keep track of "currently watching" and "finished" videos
-1. Publish to
-  - Windows Store
-  - Amazon App Store
-  - Apple App Store
+- Run on the following platforms (chosen primarily because I own and use):
+  - [Windows 10](https://github.com/neilgoodman/gb-player/issues/6)
+  - [FireTV](https://github.com/neilgoodman/gb-player/issues/5)
+  - [iPhone](https://github.com/neilgoodman/gb-player/issues/7)
+- [Support browsing video content in multiple categories](https://github.com/neilgoodman/gb-player/issues/1)
+- [Stream both free and premium videos](https://github.com/neilgoodman/gb-player/issues/3)
+- [Sync video progress cross-platform and potentially sync with the Giant Bomb website itself](https://github.com/neilgoodman/gb-player/issues/4)
 
 #### V2
-1. Offline video support
-1. Support YouTube player for available content (may bring this up to V1 given the [current buffering issues](https://www.giantbomb.com/forums/bug-reporting-33/buffering-issues-with-video-player-1812369/#105) Giant Bomb has)
-1. Stream live content (might be easy, if so I'll bring into V1)
+- Offline video support
+- Support YouTube player for available content (may bring this up to V1 given the [current buffering issues](https://www.giantbomb.com/forums/bug-reporting-33/buffering-issues-with-video-player-1812369/#105) Giant Bomb has)
+- Stream live content (might be easy, if so I'll bring into V1)
 
 ### Quality Goals
 
-1. Type system
-1. Support unit testing with 95% coverage minimum
-1. Continuous integration
-1. Track metrics in prod
+- [Type system](https://github.com/neilgoodman/gb-player/issues/8)
+- Support unit testing with 95% coverage minimum
+- [Continuous integration](https://github.com/neilgoodman/gb-player/issues/9)
+- [Track metrics in prod](https://github.com/neilgoodman/gb-player/issues/10)
   - Errors
   - Latency
-1. Free and open source
+- Free and open source
   - As a consequence, I don't want to pay or support any services as part of this project
 
 ### Research and current approach
 
-1. [Giant Bomb API](https://www.giantbomb.com/api/documentation)
+- [Giant Bomb API](https://www.giantbomb.com/api/documentation)
   - [How to authenticate using the Giant Bomb API](https://www.giantbomb.com/forums/api-developers-3017/how-to-authenticate-a-gb-app-1807094/#8)
   - Expo's [SecureStore API](https://docs.expo.io/versions/latest/sdk/securestore.html) for auth tokens
   - [Giant Bomb save-time API](https://www.giantbomb.com/api/documentation#toc-0-57) to save video progress
-1. [React Native](https://facebook.github.io/react-native/docs/getting-started.html) can be used to support all target platforms
-1. [Redux](https://redux.js.org/) can used to manage application state
-1. [Expo framework](https://expo.io/s) can simplify/eliminate native development
+- [React Native](https://facebook.github.io/react-native/docs/getting-started.html) can be used to support all target platforms
+- [Redux](https://redux.js.org/) can used to manage application state
+- [Expo framework](https://expo.io/s) can simplify/eliminate native development
   - I have done a simple hello world test that works on iPhone and FireTV hardware
   - Expo seems to work well and is free ATM, but not really sure how [it's going to stay that way](https://docs.expo.io/versions/latest/introduction/faq.html)
   - None of [Expo's limitations](https://docs.expo.io/versions/latest/introduction/why-not-expo.html) impact the product goals
   - It looks like Expo has [CodePush like](https://docs.expo.io/versions/latest/guides/release-channels.html#content) support out of the box... which is amazing
   - Expo is open source and I can always eject the React Native app and create my own native apps if needed, so I'm not that worried about taking a dependency here
-1. Expo recommends using [Sentry](https://sentry.io/welcome/) for error tracking and it should be easy to use the free tier given the scope of this project
-1. [React Native for Windows](https://github.com/Microsoft/react-native-windows) can be used to support Window 10
-1. [Travis CI](https://travis-ci.org/) can be used to perform integration builds and tests
+- Expo recommends using [Sentry](https://sentry.io/welcome/) for error tracking and it should be easy to use the free tier given the scope of this project
+- [React Native for Windows](https://github.com/Microsoft/react-native-windows) can be used to support Window 10
+- [Travis CI](https://travis-ci.org/) can be used to perform integration builds and tests
   - I can probably use the `exp` CLI to publish builds to https://expo.io
   - Found an interesting module called [appr](https://github.com/FormidableLabs/appr) to generate Expo builds off pull-requests
-1. VSCode can be used for cross-platform development
+- VSCode can be used for cross-platform development
   - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) can be used to support linux tooling on Windows
   - [WSL terminals can be used in VSCode](https://stackoverflow.com/a/44450219)
   - Currently [VSCode doesn't support running extensions in a WSL environment](https://github.com/Microsoft/vscode/issues/22663), so CLI development with limited IDE integration will be used on Windows
-1. [TypeScript can be used with React Native](https://github.com/Microsoft/TypeScript-React-Native-Starter)
+- [TypeScript can be used with React Native](https://github.com/Microsoft/TypeScript-React-Native-Starter)
   - Alternatively [Flow](https://github.com/facebook/flow) can be used, but I'll try TypeScript first
-1. [Jest](https://facebook.github.io/jest/) will be used for unit tests
-1. For the first iteration I won't be using end-to-end automated device testing, largely for cost reasons
+- [Jest](https://facebook.github.io/jest/) will be used for unit tests
+- For the first iteration I won't be using end-to-end automated device testing, largely for cost reasons
 
 ## Authors
 
