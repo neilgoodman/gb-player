@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"files.eol": "\n",
-		"git.ignoreLimitWarning": true
+		"git.ignoreLimitWarning": true,
+		"eslint.packageManager": "yarn"
 	}
 }
