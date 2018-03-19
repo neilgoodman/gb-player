@@ -48,7 +48,20 @@
       "<rootDir>/node_modules/",
       "<rootDir>/lib/"
     ],
-    "cacheDirectory": ".jest/cache"
+    "cacheDirectory": ".jest/cache",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "App.js",
+      "src/**/*.{ts,tsx,js}",
+      "!**/node_modules/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 95,
+        "functions": 95,
+        "lines": 95
+      }
+    }
   },
   "dependencies": {
     "expo": "^25.0.0",
