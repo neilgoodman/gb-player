@@ -1,5 +1,7 @@
 # GB Player
 
+[![Build Status](https://travis-ci.org/neilgoodman/gb-player.svg?branch=master)](https://travis-ci.org/neilgoodman/gb-player)
+
 A work in progress to build a cross-platform video player for https://www.giantbomb.com, a website about video games.
 
 ### Product Goals
