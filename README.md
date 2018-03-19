@@ -5,57 +5,59 @@ A work in progress to build a cross-platform video player for https://www.giantb
 ### Product Goals
 
 #### V1
-- Run on the following platforms (chosen primarily because I own and use):
-  - [Windows 10](https://github.com/neilgoodman/gb-player/issues/6)
-  - [FireTV](https://github.com/neilgoodman/gb-player/issues/5)
-  - [iPhone](https://github.com/neilgoodman/gb-player/issues/7)
-- [Support browsing video content in multiple categories](https://github.com/neilgoodman/gb-player/issues/1)
-- [Stream both free and premium videos](https://github.com/neilgoodman/gb-player/issues/3)
-- [Sync video progress cross-platform and potentially sync with the Giant Bomb website itself](https://github.com/neilgoodman/gb-player/issues/4)
+
+* Run on the following platforms (chosen primarily because I own and use):
+  * [Windows 10](https://github.com/neilgoodman/gb-player/issues/6)
+  * [FireTV](https://github.com/neilgoodman/gb-player/issues/5)
+  * [iPhone](https://github.com/neilgoodman/gb-player/issues/7)
+* [Support browsing video content in multiple categories](https://github.com/neilgoodman/gb-player/issues/1)
+* [Stream both free and premium videos](https://github.com/neilgoodman/gb-player/issues/3)
+* [Sync video progress cross-platform and potentially sync with the Giant Bomb website itself](https://github.com/neilgoodman/gb-player/issues/4)
 
 #### V2
-- Offline video support
-- Support YouTube player for available content (may bring this up to V1 given the [current buffering issues](https://www.giantbomb.com/forums/bug-reporting-33/buffering-issues-with-video-player-1812369/#105) Giant Bomb has)
-- Stream live content (might be easy, if so I'll bring into V1)
+
+* Offline video support
+* Support YouTube player for available content (may bring this up to V1 given the [current buffering issues](https://www.giantbomb.com/forums/bug-reporting-33/buffering-issues-with-video-player-1812369/#105) Giant Bomb has)
+* Stream live content (might be easy, if so I'll bring into V1)
 
 ### Quality Goals
 
-- [Type system](https://github.com/neilgoodman/gb-player/issues/8)
-- Support unit testing with 95% coverage minimum
-- [Continuous integration](https://github.com/neilgoodman/gb-player/issues/9)
-- [Track metrics in prod](https://github.com/neilgoodman/gb-player/issues/10)
-  - Errors
-  - Latency
-- Free and open source
-  - As a consequence, I don't want to pay or support any services as part of this project
+* [Type system](https://github.com/neilgoodman/gb-player/issues/8)
+* [Support unit testing with 95% coverage minimum](https://github.com/neilgoodman/gb-player/issues/11)
+* [Continuous integration](https://github.com/neilgoodman/gb-player/issues/9)
+* [Track metrics in prod](https://github.com/neilgoodman/gb-player/issues/10)
+  * Errors
+  * Latency
+* Free and open source
+  * As a consequence, I don't want to pay or support any services as part of this project
 
 ### Research and current approach
 
-- [Giant Bomb API](https://www.giantbomb.com/api/documentation)
-  - [How to authenticate using the Giant Bomb API](https://www.giantbomb.com/forums/api-developers-3017/how-to-authenticate-a-gb-app-1807094/#8)
-  - Expo's [SecureStore API](https://docs.expo.io/versions/latest/sdk/securestore.html) for auth tokens
-  - [Giant Bomb save-time API](https://www.giantbomb.com/api/documentation#toc-0-57) to save video progress
-- [React Native](https://facebook.github.io/react-native/docs/getting-started.html) can be used to support all target platforms
-- [Redux](https://redux.js.org/) can used to manage application state
-- [Expo framework](https://expo.io/s) can simplify/eliminate native development
-  - I have done a simple hello world test that works on iPhone and FireTV hardware
-  - Expo seems to work well and is free ATM, but not really sure how [it's going to stay that way](https://docs.expo.io/versions/latest/introduction/faq.html)
-  - None of [Expo's limitations](https://docs.expo.io/versions/latest/introduction/why-not-expo.html) impact the product goals
-  - It looks like Expo has [CodePush like](https://docs.expo.io/versions/latest/guides/release-channels.html#content) support out of the box... which is amazing
-  - Expo is open source and I can always eject the React Native app and create my own native apps if needed, so I'm not that worried about taking a dependency here
-- Expo recommends using [Sentry](https://sentry.io/welcome/) for error tracking and it should be easy to use the free tier given the scope of this project
-- [React Native for Windows](https://github.com/Microsoft/react-native-windows) can be used to support Window 10
-- [Travis CI](https://travis-ci.org/) can be used to perform integration builds and tests
-  - I can probably use the `exp` CLI to publish builds to https://expo.io
-  - Found an interesting module called [appr](https://github.com/FormidableLabs/appr) to generate Expo builds off pull-requests
-- VSCode can be used for cross-platform development
-  - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) can be used to support linux tooling on Windows
-  - [WSL terminals can be used in VSCode](https://stackoverflow.com/a/44450219)
-  - Currently [VSCode doesn't support running extensions in a WSL environment](https://github.com/Microsoft/vscode/issues/22663), so CLI development with limited IDE integration will be used on Windows
-- [TypeScript can be used with React Native](https://github.com/Microsoft/TypeScript-React-Native-Starter)
-  - Alternatively [Flow](https://github.com/facebook/flow) can be used, but I'll try TypeScript first
-- [Jest](https://facebook.github.io/jest/) will be used for unit tests
-- For the first iteration I won't be using end-to-end automated device testing, largely for cost reasons
+* [Giant Bomb API](https://www.giantbomb.com/api/documentation)
+  * [How to authenticate using the Giant Bomb API](https://www.giantbomb.com/forums/api-developers-3017/how-to-authenticate-a-gb-app-1807094/#8)
+  * Expo's [SecureStore API](https://docs.expo.io/versions/latest/sdk/securestore.html) for auth tokens
+  * [Giant Bomb save-time API](https://www.giantbomb.com/api/documentation#toc-0-57) to save video progress
+* [React Native](https://facebook.github.io/react-native/docs/getting-started.html) can be used to support all target platforms
+* [Redux](https://redux.js.org/) can used to manage application state
+* [Expo framework](https://expo.io/s) can simplify/eliminate native development
+  * I have done a simple hello world test that works on iPhone and FireTV hardware
+  * Expo seems to work well and is free ATM, but not really sure how [it's going to stay that way](https://docs.expo.io/versions/latest/introduction/faq.html)
+  * None of [Expo's limitations](https://docs.expo.io/versions/latest/introduction/why-not-expo.html) impact the product goals
+  * It looks like Expo has [CodePush like](https://docs.expo.io/versions/latest/guides/release-channels.html#content) support out of the box... which is amazing
+  * Expo is open source and I can always eject the React Native app and create my own native apps if needed, so I'm not that worried about taking a dependency here
+* Expo recommends using [Sentry](https://sentry.io/welcome/) for error tracking and it should be easy to use the free tier given the scope of this project
+* [React Native for Windows](https://github.com/Microsoft/react-native-windows) can be used to support Window 10
+* [Travis CI](https://travis-ci.org/) can be used to perform integration builds and tests
+  * I can probably use the `exp` CLI to publish builds to https://expo.io
+  * Found an interesting module called [appr](https://github.com/FormidableLabs/appr) to generate Expo builds off pull-requests
+* VSCode can be used for cross-platform development
+  * [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10) can be used to support linux tooling on Windows
+  * [WSL terminals can be used in VSCode](https://stackoverflow.com/a/44450219)
+  * Currently [VSCode doesn't support running extensions in a WSL environment](https://github.com/Microsoft/vscode/issues/22663), so CLI development with limited IDE integration will be used on Windows
+* [TypeScript can be used with React Native](https://github.com/Microsoft/TypeScript-React-Native-Starter)
+  * Alternatively [Flow](https://github.com/facebook/flow) can be used, but I'll try TypeScript first
+* [Jest](https://facebook.github.io/jest/) will be used for unit tests
+* For the first iteration I won't be using end-to-end automated device testing, largely for cost reasons
 
 ## Authors
 
@@ -65,23 +67,11 @@ Neil Goodman (https://github.com/neilgoodman)
 
 Copyright (c) 2018 Neil Goodman
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Default React Native README:
 
@@ -154,14 +144,14 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 
 ##### Using Android Studio's `adb`
 
-1. Make sure that you can run adb from your terminal.
-2. Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
+1.  Make sure that you can run adb from your terminal.
+2.  Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
 
 ##### Using Genymotion's `adb`
 
-1. Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
-2. Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
-3. Make sure that you can run adb from your terminal.
+1.  Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
+2.  Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
+3.  Make sure that you can run adb from your terminal.
 
 #### `npm run eject`
 
@@ -204,6 +194,7 @@ REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname' npm start
 ```
 
 Windows:
+
 ```
 set REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname'
 npm start
@@ -219,13 +210,12 @@ React Native works with [Flow](http://flowtype.org/) out of the box, as long as 
 
 To add a local dependency to the correct Flow version to a Create React Native App project, follow these steps:
 
-1. Find the Flow `[version]` at the bottom of the included [.flowconfig](.flowconfig)
-2. Run `npm install --save-dev flow-bin@x.y.z` (or `yarn add --dev flow-bin@x.y.z`), where `x.y.z` is the .flowconfig version number.
-3. Add `"flow": "flow"` to the `scripts` section of your `package.json`.
-4. Add `// @flow` to any files you want to type check (for example, to `App.js`).
+1.  Find the Flow `[version]` at the bottom of the included [.flowconfig](.flowconfig)
+2.  Run `npm install --save-dev flow-bin@x.y.z` (or `yarn add --dev flow-bin@x.y.z`), where `x.y.z` is the .flowconfig version number.
+3.  Add `"flow": "flow"` to the `scripts` section of your `package.json`.
+4.  Add `// @flow` to any files you want to type check (for example, to `App.js`).
 
-Now you can run `npm run flow` (or `yarn flow`) to check the files for type errors.
-You can optionally use a [plugin for your IDE or editor](https://flow.org/en/docs/editors/) for a better integrated experience.
+Now you can run `npm run flow` (or `yarn flow`) to check the files for type errors. You can optionally use a [plugin for your IDE or editor](https://flow.org/en/docs/editors/) for a better integrated experience.
 
 To learn more about Flow, check out [its documentation](https://flow.org/).
 
@@ -296,9 +286,9 @@ If you're on a Mac, there are a few errors that users sometimes see when attempt
 
 There are a few steps you may want to take to troubleshoot these kinds of errors:
 
-1. Make sure Xcode is installed and open it to accept the license agreement if it prompts you. You can install it from the Mac App Store.
-2. Open Xcode's Preferences, the Locations tab, and make sure that the `Command Line Tools` menu option is set to something. Sometimes when the CLI tools are first installed by Homebrew this option is left blank, which can prevent Apple utilities from finding the simulator. Make sure to re-run `npm/yarn run ios` after doing so.
-3. If that doesn't work, open the Simulator, and under the app menu select `Reset Contents and Settings...`. After that has finished, quit the Simulator, and re-run `npm/yarn run ios`.
+1.  Make sure Xcode is installed and open it to accept the license agreement if it prompts you. You can install it from the Mac App Store.
+2.  Open Xcode's Preferences, the Locations tab, and make sure that the `Command Line Tools` menu option is set to something. Sometimes when the CLI tools are first installed by Homebrew this option is left blank, which can prevent Apple utilities from finding the simulator. Make sure to re-run `npm/yarn run ios` after doing so.
+3.  If that doesn't work, open the Simulator, and under the app menu select `Reset Contents and Settings...`. After that has finished, quit the Simulator, and re-run `npm/yarn run ios`.
 
 ### QR Code does not scan
 
