@@ -8,6 +8,7 @@
     "@types/react": "^16.0.40",
     "@types/react-native": "^0.52.18",
     "@types/react-test-renderer": "^16.0.1",
+    "exp": "^50.0.1",
     "husky": "^0.14.3",
     "jest-expo": "25.0.0",
     "lint-staged": "^7.0.0",
@@ -32,6 +33,12 @@
     "test": "node node_modules/jest/bin/jest.js",
     "format":
       "node node_modules/prettier/bin-prettier.js --write .babelrc .prettierrc .watchmanconfig App.js '*.json' 'src/**/*.{ts,tsx,js}' README.md",
+    "ci-build": "yarn lint && yarn test",
+    "exp-login":
+      "node node_modules/exp/bin/exp.js login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
+    "exp-publish": "node node_modules/exp/bin/exp.js publish",
+    "exp-publish-test":
+      "node node_modules/exp/bin/exp.js publish --release-channel test",
     "precommit": "yarn format && yarn lint && yarn test",
     "prepush": "yarn format && yarn lint && yarn test"
   },

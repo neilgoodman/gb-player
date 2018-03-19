@@ -1,0 +1,10 @@
+language: node_js
+node_js: 
+  - "8.10.0"
+cache: yarn
+script:
+  - yarn ci-build
+before_deploy:
+  - yarn exp-login
+deploy:
+  - yarn exp-publish-test

@@ -1,5 +1,9 @@
 {
   "expo": {
+    "name": "GB Player",
+    "slug": "gb-player",
+    "version": "0.1.0",
+    "githubUrl": "https://github.com/neilgoodman/gb-player",
     "sdkVersion": "25.0.0",
     "packagerOpts": {
       "sourceExts": ["ts", "tsx"],
