@@ -7,4 +7,5 @@ script:
 before_deploy:
   - yarn exp-login
 deploy:
-  - yarn exp-publish-test
+  provider: script
+  script: yarn exp-publish-test
