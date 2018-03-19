@@ -11,5 +11,6 @@ script:
 before_deploy:
   - yarn exp-login
 deploy:
+  skip_cleanup: true
   provider: script
   script: yarn exp-publish-test
