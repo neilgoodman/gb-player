@@ -28,47 +28,14 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "lint":
-      "node node_modules/tslint/bin/tslint -c tslint.json './src/**/*.{ts,tsx}'",
-    "test": "node node_modules/jest/bin/jest.js",
-    "format":
-      "node node_modules/prettier/bin-prettier.js --write .babelrc .prettierrc .watchmanconfig App.js '*.json' 'src/**/*.{ts,tsx,js}' README.md",
-    "ci-build": "yarn lint && yarn test",
+    "test": "node node_modules/jest/bin/jest.js --config jest.config.js",
+    "lint-staged": "node_modules/.bin/lint-staged",
     "exp-login":
       "node node_modules/exp/bin/exp.js login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
     "exp-publish": "node node_modules/exp/bin/exp.js publish",
     "exp-publish-test":
       "node node_modules/exp/bin/exp.js publish --release-channel test",
-    "precommit": "yarn format && yarn lint && yarn test",
-    "prepush": "yarn format && yarn lint && yarn test"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "moduleFileExtensions": ["ts", "tsx", "js"],
-    "transform": {
-      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "testPathIgnorePatterns": [
-      "\\.snap$",
-      "<rootDir>/node_modules/",
-      "<rootDir>/lib/"
-    ],
-    "cacheDirectory": ".jest/cache",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "App.js",
-      "src/**/*.{ts,tsx,js}",
-      "!**/node_modules/**"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 95,
-        "functions": 95,
-        "lines": 95
-      }
-    }
+    "precommit": "yarn lint-staged && yarn test"
   },
   "dependencies": {
     "expo": "^25.0.0",

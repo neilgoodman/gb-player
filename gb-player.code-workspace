@@ -6,6 +6,10 @@
 	],
 	"settings": {
 		"files.eol": "\n",
-		"git.ignoreLimitWarning": true
+		"git.ignoreLimitWarning": true,
+		"jest.pathToConfig": "jest.config.js",
+		"jest.pathToJest": "node node_modules/jest/bin/jest.js",
+		"tslint.configFile": "tslint.json",
+		"tslint.packageManager": "yarn"
 	}
 }
