@@ -7,6 +7,8 @@
     "@types/jest": "^22.2.0",
     "@types/react": "^16.0.40",
     "@types/react-native": "^0.52.18",
+    "@types/react-navigation": "^1.2.3",
+    "@types/react-redux": "^5.0.15",
     "@types/react-test-renderer": "^16.0.1",
     "exp": "^50.0.1",
     "husky": "^0.14.3",
@@ -28,19 +30,21 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --config jest.config.js",
-    "lint-staged": "node_modules/.bin/lint-staged",
+    "test": "jest --config jest.config.js",
+    "lint-staged": "lint-staged",
     "exp-login":
-      "node node_modules/exp/bin/exp.js login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
-    "exp-publish": "node node_modules/exp/bin/exp.js publish",
-    "exp-publish-test":
-      "node node_modules/exp/bin/exp.js publish --release-channel test",
+      "exp login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
+    "exp-publish": "exp publish",
+    "exp-publish-test": "exp publish --release-channel test",
     "precommit": "yarn lint-staged && yarn test"
   },
   "dependencies": {
     "expo": "^25.0.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
+    "react-navigation": "^1.5.8",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
     "tslib": "^1.9.0"
   }
 }
