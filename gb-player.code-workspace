@@ -4,6 +4,15 @@
       "path": "."
     }
   ],
+  "extensions": {
+    "recommendations": [
+      "Orta.vscode-jest",
+      "esbenp.prettier-vscode",
+      "vsmobile.vscode-react-native",
+      "eg2.tslint",
+      "gamunu.vscode-yarn"
+    ]
+  },
   "settings": {
     "files.eol": "\n",
     "git.ignoreLimitWarning": true,

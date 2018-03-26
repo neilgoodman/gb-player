@@ -1,6 +1,7 @@
 module.exports = {
   preset: 'jest-expo',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
+  modulePaths: ['<rootDir>'],
   transform: {
     '^.+\\.(js)$': '<rootDir>/node_modules/babel-jest',
     '\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest/preprocessor.js',
