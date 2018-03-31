@@ -3,7 +3,7 @@ import { Linking, Text, View } from 'react-native';
 import AuthToken from '../../lib/AuthToken';
 import {
   AuthenticationPoller,
-  Authenticator,
+  Client,
 } from '../../lib/giant-bomb-api-client/auth';
 import styleGuide from '../../styleGuide';
 import Button from '../Button';
@@ -23,19 +23,21 @@ export default class LoginScreen extends React.Component<
   IState
 > {
   public static ROUTE = 'LOGIN_SCREEN_ROUTE';
+  private _client: Client;
 
   constructor(props: IScreenComponentProps) {
     super(props);
     this.state = {
-      loginEndpoint: Authenticator.getLoginEndpoint(),
+      loginEndpoint: Client.LOGIN_ENDPOINT,
       hasLoaded: false,
       authenticationPoller: null,
       regCode: '',
     };
+    this._client = new Client();
   }
 
   public async componentWillMount() {
-    const getCodeResult = await Authenticator.getCodeAsync();
+    const getCodeResult = await this._client.getCodeAsync();
     this.setState({
       regCode: getCodeResult.regCode,
       authenticationPoller: new AuthenticationPoller(getCodeResult),

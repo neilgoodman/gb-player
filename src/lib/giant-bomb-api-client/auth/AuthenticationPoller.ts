@@ -1,6 +1,6 @@
-import Authenticator from './Authenticator';
-import GetCodeResult from './GetCodeResult';
-import GetResultResult from './GetResultResult';
+import Client from './Client';
+import GetCode from './GetCode';
+import GetResult from './GetResult';
 
 const ONE_SECOND_IN_MILLISECONDS = 1000;
 
@@ -23,26 +23,35 @@ const maxRetriesReached = (
   return totalRetriesInSeconds >= maxRetriesInSeconds;
 };
 
+/**
+ * Polls {@link Client.getResultAsync} until a success has been returned or
+ * the timeout returned by {@link Client.getCodeAsync} is reached.
+ */
 export default class AuthenticationPoller {
   private _numberOfRetries: number;
-  private _getCodeResult: GetCodeResult;
+  private _getCode: GetCode;
   private _timer?: number;
   private _hasStopped: boolean;
+  private _client: Client;
 
-  constructor(getCodeResult: GetCodeResult) {
+  constructor(getCode: GetCode) {
     this._numberOfRetries = 0;
     this._hasStopped = true;
-    this._getCodeResult = getCodeResult;
+    this._getCode = getCode;
+    this._client = new Client();
   }
 
-  public async startAsync(): Promise<GetResultResult | null> {
+  /**
+   * Start polling {@link Client.getResultAsync}.
+   */
+  public async startAsync(): Promise<GetResult | null> {
     this.stop();
 
     this._numberOfRetries = 0;
     this._hasStopped = false;
-    let getResultResult: GetResultResult | null = null;
+    let getResult: GetResult | null = null;
 
-    while (getResultResult === null) {
+    while (getResult === null) {
       if (this._hasStopped) {
         break;
       }
@@ -50,8 +59,8 @@ export default class AuthenticationPoller {
       if (
         maxRetriesReached(
           this._numberOfRetries,
-          this._getCodeResult.retryInterval,
-          this._getCodeResult.retryDuration
+          this._getCode.retryInterval,
+          this._getCode.retryDuration
         )
       ) {
         break;
@@ -59,12 +68,15 @@ export default class AuthenticationPoller {
         this._numberOfRetries++;
       }
 
-      getResultResult = await this._pollGetResult();
+      getResult = await this._pollGetResult();
     }
 
-    return getResultResult;
+    return getResult;
   }
 
+  /**
+   * Stop polling {@link Client.getResultAsync}.
+   */
   public stop(): void {
     this._hasStopped = true;
     if (this._timer !== undefined) {
@@ -73,27 +85,35 @@ export default class AuthenticationPoller {
     }
   }
 
+  /**
+   * Returns true if polling has started.
+   */
   public hasStarted(): boolean {
     return !this._hasStopped;
   }
 
-  private async _pollGetResult(): Promise<GetResultResult | null> {
-    return new Promise<GetResultResult | null>((resolve, reject) => {
+  private async _pollGetResult(): Promise<GetResult | null> {
+    return new Promise<GetResult | null>((resolve, reject) => {
       this._timer = setTimeout(async () => {
+        if (this._hasStopped) {
+          resolve(null);
+          return;
+        }
+
         try {
-          const getResultResult = await Authenticator.getResultAsync(
-            this._getCodeResult.regCode
+          const getResult = await this._client.getResultAsync(
+            this._getCode.regCode
           );
 
-          if (getResultResult.status === 'success') {
-            resolve(getResultResult);
+          if (getResult.status === 'success') {
+            resolve(getResult);
           } else {
             resolve(null);
           }
         } catch (error) {
           reject(error);
         }
-      }, this._getCodeResult.retryInterval * ONE_SECOND_IN_MILLISECONDS);
+      }, this._getCode.retryInterval * ONE_SECOND_IN_MILLISECONDS);
     });
   }
 }

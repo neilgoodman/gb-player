@@ -1,4 +1,4 @@
-export default class GetResultResult {
+export default class GetResult {
   private _status: string;
   private _creationTime: string;
   private _customerId: number;

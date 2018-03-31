@@ -1,4 +1,4 @@
-export default class GetCodeResult {
+export default class GetCode {
   private _status: string;
   private _retryInterval: number;
   private _retryDuration: number;

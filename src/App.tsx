@@ -25,7 +25,7 @@ const STACK_NAVIGATOR_CONFIG = {
   },
 };
 
-// tslint:disable-next-line
+// tslint:disable-next-line:variable-name
 const RootStack = StackNavigator(
   STACK_NAVIGATOR_SCREENS,
   STACK_NAVIGATOR_CONFIG

@@ -13,6 +13,7 @@
     "exp": "^50.0.1",
     "husky": "^0.14.3",
     "jest-expo": "25.0.0",
+    "jest-fetch-mock": "^1.5.0",
     "lint-staged": "^7.0.0",
     "prettier": "^1.11.1",
     "react-native-scripts": "1.11.1",
@@ -32,11 +33,14 @@
     "ios": "react-native-scripts ios",
     "test": "tsc -p tsconfig.json && jest --config jest.config.js",
     "lint-staged": "lint-staged",
-    "exp-login": "exp login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
+    "exp-login":
+      "exp login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
     "exp-publish": "exp publish",
     "exp-publish-test": "exp publish --release-channel test",
     "clean": "rm -rf ./node_modules ./expo ./jest",
     "lint": "tslint -c tslint.json ./src/**/*.{ts,tsx}",
+    "format":
+      "prettier --write ./**/*.{ts,tsx,js,jsx,json,css,md,babelrc,prettierrc,watchmanconfig}",
     "ci-build": "yarn lint && yarn test",
     "precommit": "yarn lint-staged && yarn test"
   },

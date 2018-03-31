@@ -1,6 +1,6 @@
 import AuthenticationPoller from './AuthenticationPoller';
-import Authenticator from './Authenticator';
-import GetCodeResult from './GetCodeResult';
-import GetResultResult from './GetResultResult';
+import Client from './Client';
+import GetCode from './GetCode';
+import GetResult from './GetResult';
 
-export { AuthenticationPoller, Authenticator, GetCodeResult, GetResultResult };
+export { AuthenticationPoller, Client, GetCode, GetResult };

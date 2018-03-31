@@ -26,4 +26,5 @@ module.exports = {
       lines: 95,
     },
   },
+  setupFiles: ['./setupJest.js'],
 };
