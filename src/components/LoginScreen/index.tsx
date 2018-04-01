@@ -1,10 +1,7 @@
 import React from 'react';
 import { Linking, Text, View } from 'react-native';
 import AuthToken from '../../lib/AuthToken';
-import {
-  AuthenticationPoller,
-  Client,
-} from '../../lib/giant-bomb-api-client/auth';
+import { Client, GetResultPoller } from '../../lib/giant-bomb-api-client/auth';
 import styleGuide from '../../styleGuide';
 import Button from '../Button';
 import HomeScreen from '../HomeScreen';
@@ -14,7 +11,7 @@ import styles from './styles';
 export interface IState {
   loginEndpoint: string;
   hasLoaded: boolean;
-  authenticationPoller: AuthenticationPoller | null;
+  getResultPoller: GetResultPoller | null;
   regCode: string;
 }
 
@@ -30,7 +27,7 @@ export default class LoginScreen extends React.Component<
     this.state = {
       loginEndpoint: Client.LOGIN_ENDPOINT,
       hasLoaded: false,
-      authenticationPoller: null,
+      getResultPoller: null,
       regCode: '',
     };
     this._client = new Client();
@@ -40,16 +37,16 @@ export default class LoginScreen extends React.Component<
     const getCodeResult = await this._client.getCodeAsync();
     this.setState({
       regCode: getCodeResult.regCode,
-      authenticationPoller: new AuthenticationPoller(getCodeResult),
+      getResultPoller: new GetResultPoller(getCodeResult),
       hasLoaded: true,
     });
   }
 
   public componentWillUnmount() {
-    const { authenticationPoller } = this.state;
+    const { getResultPoller } = this.state;
 
-    if (authenticationPoller) {
-      authenticationPoller.stop();
+    if (getResultPoller) {
+      getResultPoller.stop();
     }
   }
 
@@ -57,9 +54,9 @@ export default class LoginScreen extends React.Component<
     prevProps: IScreenComponentProps,
     prevState: IState
   ) {
-    const { authenticationPoller } = this.state;
-    if (authenticationPoller && !authenticationPoller.hasStarted()) {
-      const getResultResult = await authenticationPoller.startAsync();
+    const { getResultPoller } = this.state;
+    if (getResultPoller && !getResultPoller.hasStarted()) {
+      const getResultResult = await getResultPoller.startAsync();
 
       if (getResultResult !== null) {
         await AuthToken.setAsync(getResultResult.regToken);

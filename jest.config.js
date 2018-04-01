@@ -27,4 +27,11 @@ module.exports = {
     },
   },
   setupFiles: ['./setupJest.js'],
+  // See https://github.com/facebook/jest/issues/2663#issuecomment-317109798
+  // Only happens to me on Windows 10
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/assetsTransformer.js',
+    '\\.(css|less)$': '<rootDir>/assetsTransformer.js',
+  },
 };

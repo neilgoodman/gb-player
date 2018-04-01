@@ -35,11 +35,11 @@ export default class DataLayer {
    * Given a request object, make a GET HTTP request to the Giant Bomb API.
    *
    * @param request An object that implements the {@link IRequest} interface.
-   * @param responseFactory A function that will produce an instance of V from the result of {@link fastXmlParser.parse}.
+   * @param responseMapper A function that will produce an instance of V from the result of {@link fastXmlParser.parse}.
    */
-  public async fetch<T extends IRequest, V>(
+  public async fetchAsync<T extends IRequest, V>(
     request: T,
-    responseFactory: (value: any) => V
+    responseMapper: (value: any) => V
   ): Promise<V> {
     let url = this._baseUrl + request.path;
     let params = request.params;
@@ -59,6 +59,6 @@ export default class DataLayer {
     const xmlString = await response.text();
     const result = fastXmlParser.parse(xmlString);
 
-    return responseFactory(result);
+    return responseMapper(result);
   }
 }

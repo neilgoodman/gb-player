@@ -1,7 +1,7 @@
-import AuthenticationPoller from '../../../../lib/giant-bomb-api-client/auth/AuthenticationPoller';
 import GetCode from '../../../../lib/giant-bomb-api-client/auth/GetCode';
+import GetResultPoller from '../../../../lib/giant-bomb-api-client/auth/GetResultPoller';
 
-describe('AuthenticationPoller', () => {
+describe('GetResultPoller', () => {
   const getCode = new GetCode({
     status: 'success',
     regCode: 'B1234',
@@ -22,6 +22,72 @@ describe('AuthenticationPoller', () => {
 
   describe('startAsync', () => {
     it('should poll GetResult until a successful response', async () => {
+      expect.assertions(3);
+
+      fetch
+        // @ts-ignore: jest-fetch-mock
+        .mockResponseOnce(
+          '<result><status>failure</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken/><customerId>0</customerId></result>'
+        )
+        .mockResponseOnce(
+          '<result><status>success</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken>A12345</regToken><customerId>0</customerId></result>'
+        );
+
+      const getResultPoller = new GetResultPoller(getCode);
+      const result = getResultPoller.startAsync();
+
+      jest.runAllTimers();
+
+      const resolvedResult = await result;
+
+      expect(resolvedResult).not.toBeNull();
+      // @ts-ignore: not-null is already asserted
+      expect(resolvedResult.regToken).toBe('A12345');
+      // @ts-ignore: jest-fetch-mock
+      expect(fetch.mock.calls.length).toBe(2);
+    });
+
+    it('should timeout while polling GetResult', async () => {
+      expect.assertions(2);
+
+      // @ts-ignore: jest-fetch-mock
+      fetch.mockResponse(
+        '<result><status>failure</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken/><customerId>0</customerId></result>'
+      );
+
+      const getResultPoller = new GetResultPoller(getCode);
+      const result = getResultPoller.startAsync();
+
+      jest.runAllTimers();
+
+      const resolvedResult = await result;
+
+      expect(resolvedResult).toBeNull();
+      // @ts-ignore: jest-fetch-mock
+      expect(fetch.mock.calls.length).toBe(3);
+    });
+
+    it('should reject promise when an error is thrown from Client', async () => {
+      expect.assertions(1);
+
+      const ERROR_MESSAGE = 'fake 503 timeout error';
+
+      // @ts-ignore: jest-fetch-mock
+      fetch.mockReject(new Error(ERROR_MESSAGE));
+
+      const getResultPoller = new GetResultPoller(getCode);
+      const result = getResultPoller.startAsync();
+
+      result.catch((error) => {
+        expect(error.message).toBe(ERROR_MESSAGE);
+      });
+
+      jest.runAllTimers();
+    });
+  });
+
+  describe('stop', () => {
+    it('should stop polling GetResult', async () => {
       expect.assertions(2);
 
       fetch
@@ -33,64 +99,18 @@ describe('AuthenticationPoller', () => {
           '<result><status>success</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken>A12345</regToken><customerId>0</customerId></result>'
         );
 
-      const authenticationPoller = new AuthenticationPoller(getCode);
-      const result = authenticationPoller.startAsync();
+      const getResultPoller = new GetResultPoller(getCode);
+      const result = getResultPoller.startAsync();
 
-      jest.runAllTimers();
+      getResultPoller.stop();
+
       jest.runAllTimers();
 
       const resolvedResult = await result;
 
-      expect(resolvedResult).not.toBeNull();
-      // @ts-ignore: not-null is already asserted
-      expect(resolvedResult.regToken).toBe('A12345');
-    });
-
-    it('should timeout while polling GetResult', async () => {
-      expect.assertions(1);
-
+      expect(resolvedResult).toBeNull();
       // @ts-ignore: jest-fetch-mock
-      fetch.mockResponse(
-        '<result><status>failure</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken/><customerId>0</customerId></result>'
-      );
-
-      const authenticationPoller = new AuthenticationPoller(getCode);
-      const result = authenticationPoller.startAsync();
-
-      jest.runAllTimers();
-      jest.runAllTimers();
-      jest.runAllTimers();
-
-      const resolvedResult = await result;
-
-      expect(resolvedResult).toBeNull();
-    });
-  });
-
-  describe('stop', () => {
-    it('should stop polling GetResult', async () => {
-      expect.assertions(1);
-
-      fetch
-        // @ts-ignore: jest-fetch-mock
-        .mockResponseOnce(
-          '<result><status>failure</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken/><customerId>0</customerId></result>'
-        )
-        .mockResponseOnce(
-          '<result><status>success</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken>A12345</regToken><customerId>0</customerId></result>'
-        );
-
-      const authenticationPoller = new AuthenticationPoller(getCode);
-      const result = authenticationPoller.startAsync();
-
-      authenticationPoller.stop();
-
-      jest.runAllTimers();
-      jest.runAllTimers();
-
-      const resolvedResult = await result;
-
-      expect(resolvedResult).toBeNull();
+      expect(fetch.mock.calls.length).toBe(0);
     });
   });
 
@@ -101,15 +121,15 @@ describe('AuthenticationPoller', () => {
         '<result><status>failure</status><creationTime>2018-03-31 14:48:19.000000</creationTime><regToken/><customerId>0</customerId></result>'
       );
 
-      const authenticationPoller = new AuthenticationPoller(getCode);
-      const result = authenticationPoller.startAsync();
+      const getResultPoller = new GetResultPoller(getCode);
+      const result = getResultPoller.startAsync();
 
-      expect(authenticationPoller.hasStarted()).toBe(true);
+      expect(getResultPoller.hasStarted()).toBe(true);
     });
 
     it('should return false when polling has not started', () => {
-      const authenticationPoller = new AuthenticationPoller(getCode);
-      expect(authenticationPoller.hasStarted()).toBe(false);
+      const getResultPoller = new GetResultPoller(getCode);
+      expect(getResultPoller.hasStarted()).toBe(false);
     });
   });
 });

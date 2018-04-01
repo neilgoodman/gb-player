@@ -27,7 +27,7 @@ const maxRetriesReached = (
  * Polls {@link Client.getResultAsync} until a success has been returned or
  * the timeout returned by {@link Client.getCodeAsync} is reached.
  */
-export default class AuthenticationPoller {
+export default class GetResultPoller {
   private _numberOfRetries: number;
   private _getCode: GetCode;
   private _timer?: number;
@@ -79,10 +79,6 @@ export default class AuthenticationPoller {
    */
   public stop(): void {
     this._hasStopped = true;
-    if (this._timer !== undefined) {
-      clearTimeout(this._timer);
-      delete this._timer;
-    }
   }
 
   /**

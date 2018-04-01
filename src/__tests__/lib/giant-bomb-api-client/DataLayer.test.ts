@@ -8,7 +8,7 @@ interface IResult {
 
 describe('DataLayer', () => {
   let request: IRequest;
-  let responseFactory: (value: any) => IResult;
+  let responseMapper: (value: any) => IResult;
   const BASE_URL = 'http://fake.bogus';
   const API_KEY = '12345';
 
@@ -18,7 +18,7 @@ describe('DataLayer', () => {
       params: { key1: 'value1', key2: 'value2' },
     };
 
-    responseFactory = (value) => {
+    responseMapper = (value) => {
       return { resultKey: value.result.key };
     };
 
@@ -31,26 +31,26 @@ describe('DataLayer', () => {
     fetch.resetMocks();
   });
 
-  describe('fetch', () => {
-    it('returns a result from a given request', async () => {
+  describe('fetchAsync', () => {
+    it('should return a result from a given request', async () => {
       expect.assertions(1);
 
       const dataLayer = new DataLayer(BASE_URL);
-      const result = await dataLayer.fetch<IRequest, IResult>(
+      const result = await dataLayer.fetchAsync<IRequest, IResult>(
         request,
-        responseFactory
+        responseMapper
       );
 
       expect(result.resultKey).toBe('testValue');
     });
 
-    it('sends params for a given request', async () => {
+    it('should send params for a given request', async () => {
       expect.assertions(1);
 
       const dataLayer = new DataLayer(BASE_URL);
-      const result = await dataLayer.fetch<IRequest, IResult>(
+      const result = await dataLayer.fetchAsync<IRequest, IResult>(
         request,
-        responseFactory
+        responseMapper
       );
 
       // @ts-ignore: jest-fetch-mock
@@ -59,16 +59,16 @@ describe('DataLayer', () => {
       );
     });
 
-    it('adds api_key to params for a given request', async () => {
+    it('should add api_key to params for a given request', async () => {
       expect.assertions(1);
 
       // @ts-ignore: jest-fetch-mock
       fetch.mockResponseOnce('<result><key>testValue</key></result>');
 
       const dataLayer = new DataLayer(BASE_URL, API_KEY);
-      const result = await dataLayer.fetch<IRequest, IResult>(
+      const result = await dataLayer.fetchAsync<IRequest, IResult>(
         request,
-        responseFactory
+        responseMapper
       );
 
       // @ts-ignore: jest-fetch-mock

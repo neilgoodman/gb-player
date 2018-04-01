@@ -37,7 +37,7 @@
       "exp login --non-interactive -u $EXP_USERNAME -p $EXP_PASSWORD",
     "exp-publish": "exp publish",
     "exp-publish-test": "exp publish --release-channel test",
-    "clean": "rm -rf ./node_modules ./expo ./jest",
+    "clean": "rm -rf ./node_modules ./expo ./jest ./yarn-error.log",
     "lint": "tslint -c tslint.json ./src/**/*.{ts,tsx}",
     "format":
       "prettier --write ./**/*.{ts,tsx,js,jsx,json,css,md,babelrc,prettierrc,watchmanconfig}",

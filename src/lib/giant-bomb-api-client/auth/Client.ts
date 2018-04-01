@@ -27,7 +27,7 @@ export default class Client {
   public async getCodeAsync(): Promise<GetCode> {
     const request = new GetCodeRequest({ deviceID: DEVICE_ID });
 
-    return await this._dataLayer.fetch<GetCodeRequest, GetCode>(
+    return await this._dataLayer.fetchAsync<GetCodeRequest, GetCode>(
       request,
       (response) => new GetCode(response.result)
     );
@@ -43,7 +43,7 @@ export default class Client {
       deviceID: DEVICE_ID,
     });
 
-    return await this._dataLayer.fetch<GetResultRequest, GetResult>(
+    return await this._dataLayer.fetchAsync<GetResultRequest, GetResult>(
       request,
       (response) => new GetResult(response.result)
     );
