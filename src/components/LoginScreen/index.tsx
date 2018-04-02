@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linking, Text, View } from 'react-native';
-import AuthToken from '../../lib/AuthToken';
+import AuthTokenStore from '../../lib/AuthTokenStore';
 import { Client, GetResultPoller } from '../../lib/giant-bomb-api-client/auth';
 import styleGuide from '../../styleGuide';
 import Button from '../Button';
@@ -59,7 +59,7 @@ export default class LoginScreen extends React.Component<
       const getResultResult = await getResultPoller.startAsync();
 
       if (getResultResult !== null) {
-        await AuthToken.setAsync(getResultResult.regToken);
+        await AuthTokenStore.setAsync(getResultResult.regToken);
         this.props.navigation.navigate(HomeScreen.ROUTE);
       }
     }

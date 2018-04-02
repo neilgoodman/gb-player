@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Button, { IProps } from '../../components/Button';
+import Button, { IProps } from '../';
 
 describe('Button', () => {
   let props: IProps;

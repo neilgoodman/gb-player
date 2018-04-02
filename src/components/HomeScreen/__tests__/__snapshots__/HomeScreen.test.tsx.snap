@@ -1,5 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HomeScreen render should render correctly when authToken is given 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "rgb(44,46,48)",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "rgb(255,255,255)",
+      }
+    }
+  >
+    Home Screen 
+    A1234
+  </Text>
+  <View
+    accessibilityComponentType="button"
+    accessibilityLabel={undefined}
+    accessibilityTraits="button"
+    accessible={true}
+    collapsable={undefined}
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#007aff",
+            "fontSize": 17,
+            "fontWeight": "500",
+            "textAlign": "center",
+          },
+          null,
+          Array [
+            Object {
+              "backgroundColor": "rgb(81,84,88)",
+              "color": "rgb(255,255,255)",
+              "marginBottom": 40,
+              "paddingBottom": 10,
+              "paddingTop": 10,
+              "width": 710,
+            },
+          ],
+          null,
+        ]
+      }
+    >
+      Clear Auth Token
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`HomeScreen render should render correctly when given all props 1`] = `
 <View
   style={

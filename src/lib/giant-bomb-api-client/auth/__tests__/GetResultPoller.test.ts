@@ -1,5 +1,5 @@
-import GetCode from '../../../../lib/giant-bomb-api-client/auth/GetCode';
-import GetResultPoller from '../../../../lib/giant-bomb-api-client/auth/GetResultPoller';
+import GetCode from '../GetCode';
+import GetResultPoller from '../GetResultPoller';
 
 describe('GetResultPoller', () => {
   const getCode = new GetCode({

@@ -1,6 +1,4 @@
-import DataLayer, {
-  IRequest,
-} from '../../../lib/giant-bomb-api-client/DataLayer';
+import DataLayer, { IRequest } from '../DataLayer';
 
 interface IResult {
   resultKey: string;

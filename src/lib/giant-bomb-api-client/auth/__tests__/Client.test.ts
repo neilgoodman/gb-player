@@ -1,4 +1,4 @@
-import { Client } from '../../../../lib/giant-bomb-api-client/auth';
+import Client from '../Client';
 
 describe('Client', () => {
   afterEach(() => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import AuthToken from '../../lib/AuthToken';
+import AuthTokenStore from '../../lib/AuthTokenStore';
 import Button from '../Button';
 import IScreenComponentProps from '../IScreenComponentProps';
 import LoginScreen from '../LoginScreen';
@@ -24,7 +24,7 @@ export default class HomeScreen extends React.Component<
   }
 
   public async componentDidMount() {
-    const authToken = await AuthToken.getAsync();
+    const authToken = await AuthTokenStore.getAsync();
 
     this.setState({
       authToken,
@@ -36,7 +36,7 @@ export default class HomeScreen extends React.Component<
   }
 
   public onPress = (): void => {
-    AuthToken.clearAsync();
+    AuthTokenStore.clearAsync();
   };
 
   public render() {

@@ -18,6 +18,8 @@ module.exports = {
     'App.js',
     'src/**/*.{ts,tsx,js}',
     '!**/node_modules/**',
+    '!**/__mocks__/**',
+    '!**/__tests__/**',
   ],
   coverageThreshold: {
     global: {

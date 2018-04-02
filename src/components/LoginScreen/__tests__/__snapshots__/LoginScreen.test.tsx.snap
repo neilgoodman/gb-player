@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginScreen render should render correctly when given all props 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(44,46,48)",
+      "flex": 1,
+      "paddingLeft": 20,
+      "paddingRight": 20,
+      "paddingTop": 40,
+    }
+  }
+/>
+`;
+
+exports[`LoginScreen render should render correctly when state.hasLoaded and state.regCode are set 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "rgb(44,46,48)",
+      "flex": 1,
+      "paddingLeft": 20,
+      "paddingRight": 20,
+      "paddingTop": 40,
+    }
+  }
+>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "rgb(255,255,255)",
+          "fontSize": 16,
+          "marginBottom": 20,
+        }
+      }
+    >
+      Visit 
+      https://www.giantbomb.com/app/gb-player/activate
+       and enter the code below to login.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "rgb(255,255,255)",
+          "fontSize": 16,
+          "marginBottom": 20,
+        }
+      }
+    >
+      C12345
+    </Text>
+    <View
+      accessibilityComponentType="button"
+      accessibilityLabel={undefined}
+      accessibilityTraits="button"
+      accessible={true}
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#007aff",
+              "fontSize": 17,
+              "fontWeight": "500",
+              "textAlign": "center",
+            },
+            null,
+            Array [
+              Object {
+                "backgroundColor": "rgb(81,84,88)",
+                "color": "rgb(255,255,255)",
+                "marginBottom": 40,
+                "paddingBottom": 10,
+                "paddingTop": 10,
+                "width": 710,
+              },
+            ],
+            null,
+          ]
+        }
+      >
+        Go to Giant Bomb
+      </Text>
+    </View>
+  </View>
+</View>
+`;
